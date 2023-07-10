@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.0.1/modules/heatmap.min.js" integrity="sha512-UnB4oMqreoARmg5J+Z75xQj0EVIIfV3ciCNGOyZ/m6HgNcg6eztp06jio3syCn4lTsMcbWMXE0zt+XqG3seehA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" type="text/css" href="styles.css" />
+
+<div class="row">
+<img id="logo" class="row-content" src="LSEG-stacked-logo.png" width="112" height="110">
+<div id="header2" class="row-content row-content-text" width="112" height="110">Metrics Page Mock-up</div>
+<div class="dropdown row-content">
+    <button class="dropbtn row-content">Layouts</button>
+    <div class="dropdown-content">
+        <a href="graph_nav_site.html">2 2 2</a>
+        <a href="graph_123.html">1 2 3</a>
+        <a href="graph_33.html">3 3</a>
+    </div>
+</div>
+
+</div> <!--row tag-->
+
+
+<script>
+const colors = ['rgb(0,66,145)', 'rgb(0,103,182)', 'rgb(8,139,218)', 'rgb(44,175,254)', 'rgb(160,200,255)', 'rgb(200, 200, 225)', 'rgb(169, 169, 169)']
+
+let colorNum = 0;
+function grabColor() {
+    return colors[colorNum];
+}
+function switchColor() {
+    if (colorNum == colors.length || colorNum == colors.length + 1) {
+        colorNum = 0;
+    } else {
+        colorNum += 2;
+    }
+    col = colors[colorNum];
+    return col
+}
+        
+Highcharts.setOptions({
+    colors: colors
+});
+
+</script>
+
+<div class="row">
+    <div id="graph1" class="col-md-4 graph-row">
+
+        <script>
+            Highcharts.chart('graph1', {
+            
+            chart: {
+                zoomType: 'x',
+                // height: (5 / 6 * 100) + '%'
+                // height: '50%'
+            },
+    
+            title: {
+                text: 'U.S Solar Employment Growth',
+                align: 'center'
+            },
+    
+            subtitle: {
+                text: 'figure 1;  source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
+                align: 'center',
+                verticalAlign: 'bottom'
+            },
+    
+            yAxis: {
+                title: {
+                    text: 'Number of Employees'
+                }
+            },
+    
+            xAxis: {
+                accessibility: {
+                    rangeDescription: 'Range: 2010 to 2020'
+                }
+            },
+    
+            legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom'
+            },
+    
+            plotOptions: {
+                series: {
+                    marker: {
+                        enabled: false
+                    },
+                    label: {
+                        connectorAllowed: false
+                    },
+                    pointStart: 2010,
+                    lineWidth: 3
+                }
+            },
+    
+            series: [{
+                name: 'Installation & Developers',
+                data: [43934, 48656, 65165, 81827, 112143, 142383,
+                    171533, 165174, 155157, 161454, 154610]
+            }, {
+                name: 'Manufacturing',
+                data: [24916, 37941, 29742, 29851, 32490, 30282,
+                    38121, 36885, 33726, 34243, 31050]
+            }, {
+                name: 'Sales & Distribution',
+                data: [11744, 30000, 16005, 19771, 20185, 24377,
+                    32147, 30912, 29243, 29213, 25663]
+            }, {
+                name: 'Operations & Maintenance',
+                data: [null, null, null, null, null, null, null,
+                    null, 11164, 11218, 10077]
+            }, {
+                name: 'Other',
+                data: [21908, 5548, 8105, 11248, 8989, 11816, 18274,
+                    17300, 13053, 11906, 10073]
+            }],
+    
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500,
+                        minHeight: 800
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+    
+            });
+    
+        </script>
+
+    </div>
+    <div id="graph2" class="col-md-4 graph-row">
+        <script>
+            Highcharts.chart('graph2', {
+    chart: {
+        type: 'column',
+        zoomType: 'x'
+    },
+    title: {
+        text: 'Global Average Rainfall'
+    },
+    subtitle: {
+        verticalAlign: 'bottom',
+        text: 'figure 2;  source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
+            194.1, 95.6, 54.4]
+
+    }, {
+        name: 'New York',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5,
+            106.6, 92.3]
+
+    }, {
+        name: 'London',
+        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3,
+            51.2]
+
+    }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8,
+            51.1]
+
+    }]
+});
+        </script>
+    </div>
+    <div id="graph3" class="col-md-4 graph-row">
+        <script>
+            Highcharts.chart('graph3', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie',
+                },
+                title: {
+                    text: 'Browser market shares in May, 2020',
+                    align: 'left'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        colors,
+                        dataLabels: {
+                            enabled: false,
+                            // format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    size: '100%',
+                    innerSize: '50%',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Chrome',
+                        y: 70.67,
+                        sliced: true,
+                        selected: true
+                    }, {
+                        name: 'Edge',
+                        y: 14.77
+                    },  {
+                        name: 'Firefox',
+                        y: 4.86
+                    }, {
+                        name: 'Safari',
+                        y: 2.63
+                    }, {
+                        name: 'Internet Explorer',
+                        y: 1.53
+                    },  {
+                        name: 'Opera',
+                        y: 1.40
+                    }, {
+                        name: 'Sogou Explorer',
+                        y: 0.84
+                    }, {
+                        name: 'QQ',
+                        y: 0.51
+                    }, {
+                        name: 'Other',
+                        y: 2.6
+                    }]
+                }]
+            });
+</script>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <div class="col-md-4">
+        <button id="graph1legTog" class="autocompare">Toggle Legend</button>
+    </div>
+    <script>
+        var i1 = 0;
+
+        $('#graph1legTog').click(function () {
+            graph1.legend.update(i1++ % 2 ? {
+                enabled: true,
+            } : {
+                
+            enabled: false,
+            });
+        });
+    </script>
+</div> -->
+
+<div class="row">
+    <div id="graph4" class="col-md-4 graph-row">
+        <script>
+            // Substring template helper for the responsive labels
+Highcharts.Templating.helpers.substr = (s, from, length) =>
+    s.substr(from, length);
+
+// Create the chart
+
+Highcharts.chart('graph4', {
+
+    chart: {
+        type: 'heatmap',
+        marginTop: 40,
+        marginBottom: 80,
+        plotBorderWidth: 1
+    },
+
+
+    title: {
+        text: 'Sales per employee per weekday',
+        style: {
+            fontSize: '1em'
+        }
+    },
+
+    xAxis: {
+        categories: ['Alexander', 'Marie', 'Maximilian', 'Sophia', 'Lukas',
+            'Maria', 'Leon', 'Anna', 'Tim', 'Laura']
+    },
+    yAxis: {
+        categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        title: null,
+        reversed: true
+    },
+
+    accessibility: {
+        point: {
+            descriptionFormat: '{(add index 1)}. ' +
+                '{series.xAxis.categories.(x)} sales ' +
+                '{series.yAxis.categories.(y)}, {value}.'
+        }
+    },
+
+    colorAxis: {
+        min: 0,
+        minColor: '#FFFFFF',
+        maxColor: Highcharts.getOptions().colors[0]
+    },
+
+    legend: {
+        align: 'right',
+        layout: 'vertical',
+        margin: 0,
+        verticalAlign: 'top',
+        y: 25,
+        symbolHeight: 280
+    },
+
+    tooltip: {
+        format: '<b>{series.xAxis.categories.(point.x)}</b> sold<br>' +
+            '<b>{point.value}</b> items on <br>' +
+            '<b>{series.yAxis.categories.(point.y)}</b>'
+    },
+
+    series: [{
+        name: 'Sales per employee',
+        borderWidth: 1,
+        data: [[0, 0, 10], [0, 1, 19], [0, 2, 8], [0, 3, 24], [0, 4, 67],
+            [1, 0, 92], [1, 1, 58], [1, 2, 78], [1, 3, 117], [1, 4, 48],
+            [2, 0, 35], [2, 1, 15], [2, 2, 123], [2, 3, 64], [2, 4, 52],
+            [3, 0, 72], [3, 1, 132], [3, 2, 114], [3, 3, 19], [3, 4, 16],
+            [4, 0, 38], [4, 1, 5], [4, 2, 8], [4, 3, 117], [4, 4, 115],
+            [5, 0, 88], [5, 1, 32], [5, 2, 12], [5, 3, 6], [5, 4, 120],
+            [6, 0, 13], [6, 1, 44], [6, 2, 88], [6, 3, 98], [6, 4, 96],
+            [7, 0, 31], [7, 1, 1], [7, 2, 82], [7, 3, 32], [7, 4, 30],
+            [8, 0, 85], [8, 1, 97], [8, 2, 123], [8, 3, 64], [8, 4, 84],
+            [9, 0, 47], [9, 1, 114], [9, 2, 31], [9, 3, 48], [9, 4, 91]],
+        dataLabels: {
+            enabled: true,
+            color: '#000000'
+        }
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                yAxis: {
+                    labels: {
+                        format: '{substr value 0 1}'
+                    }
+                }
+            }
+        }]
+    }
+
+});
+        </script>
+    </div>
+</div>
