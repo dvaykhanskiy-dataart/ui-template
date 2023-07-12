@@ -1,0 +1,30 @@
+[
+    {
+        "group_id": 23292,
+        "group_name": "Cloud Carbon Emission Tracking tool",
+        "group_full_path": "app/app-50896",
+        "dt": "2023-05-01",
+        "cnt": 0.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-01",
+        "cnt": 0.0
+    },
+    {
+        "group_id": 35945,
+        "group_name": "Investment Research Content Research RTR",
+        "group_full_path": "app/202053",
+        "dt": "2023-05-01",
+        "cnt": 0.0
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-05-01",
+        "cnt": 0.0
+    }
+]

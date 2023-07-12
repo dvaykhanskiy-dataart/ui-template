@@ -1,0 +1,114 @@
+[
+    {
+        "group_id": 23292,
+        "group_name": "Cloud Carbon Emission Tracking tool",
+        "group_full_path": "app/app-50896",
+        "dt": "2023-05-02",
+        "cnt": 1.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-01",
+        "cnt": 2.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-02",
+        "cnt": 13.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-03",
+        "cnt": 8.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-04",
+        "cnt": 5.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-05",
+        "cnt": 4.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-06",
+        "cnt": 1.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-07",
+        "cnt": 1.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-09",
+        "cnt": 11.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-10",
+        "cnt": 10.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-11",
+        "cnt": 13.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-12",
+        "cnt": 23.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-14",
+        "cnt": 3.0
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-15",
+        "cnt": 13.0
+    },
+    {
+        "group_id": 35945,
+        "group_name": "Investment Research Content Research RTR",
+        "group_full_path": "app/202053",
+        "dt": "2023-05-04",
+        "cnt": 1.0
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-05-09",
+        "cnt": 2.0
+    }
+]

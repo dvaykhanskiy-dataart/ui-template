@@ -1,0 +1,170 @@
+[
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-07-01",
+        "cnt": 93
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-08-01",
+        "cnt": 114
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-09-01",
+        "cnt": 86
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-10-01",
+        "cnt": 105
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-11-01",
+        "cnt": 97
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-12-01",
+        "cnt": 118
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-01-01",
+        "cnt": 79
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-02-01",
+        "cnt": 117
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-03-01",
+        "cnt": 101
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-04-01",
+        "cnt": 101
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-01",
+        "cnt": 92
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-06-01",
+        "cnt": 96
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-07-01",
+        "cnt": 110
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-08-01",
+        "cnt": 154
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-09-01",
+        "cnt": 153
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-10-01",
+        "cnt": 141
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-11-01",
+        "cnt": 154
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-12-01",
+        "cnt": 155
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-01-01",
+        "cnt": 123
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-02-01",
+        "cnt": 139
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-03-01",
+        "cnt": 112
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-04-01",
+        "cnt": 104
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-05-01",
+        "cnt": 117
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-06-01",
+        "cnt": 102
+    }
+]

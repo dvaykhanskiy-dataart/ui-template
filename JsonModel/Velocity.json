@@ -1,0 +1,30 @@
+[
+    {
+        "group_id": 22166,
+        "group_name": "Application",
+        "group_full_path": "app/app-50177/application",
+        "cnt": 11,
+        "velocity": 0.7333333333333333
+    },
+    {
+        "group_id": 38962,
+        "group_name": "aws",
+        "group_full_path": "app/itc-92646/aws",
+        "cnt": 11,
+        "velocity": 0.7333333333333333
+    },
+    {
+        "group_id": 25756,
+        "group_name": "aws",
+        "group_full_path": "app/app-50588/aws",
+        "cnt": 24,
+        "velocity": 1.6
+    },
+    {
+        "group_id": 17702,
+        "group_name": "Axoni",
+        "group_full_path": "app/app-00120/axoni",
+        "cnt": 5,
+        "velocity": 0.3333333333333333
+    }
+]
