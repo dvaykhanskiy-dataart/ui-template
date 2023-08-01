@@ -3,28 +3,27 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
 
-<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.0.1/modules/heatmap.min.js" integrity="sha512-UnB4oMqreoARmg5J+Z75xQj0EVIIfV3ciCNGOyZ/m6HgNcg6eztp06jio3syCn4lTsMcbWMXE0zt+XqG3seehA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" type="text/css" href="styles3.css" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js" integrity="sha512-wUYbRPLV5zs6IqvWd88HIqZU/b8TBx+I8LEioQ/UC0t5EMCLApqhIAnUg7EsAzdbhhdgW07TqYDdH3QEXRcPOQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script src="https://code.highcharts.com/highcharts.js"></script>
-
-
-<link rel="stylesheet" type="text/css" href="styles.css" />
-
-<div class="row">
+<!-- <div class="row">
 <img id="logo" class="row-content" src="LSEG-stacked-logo.png" width="112" height="110">
-<div id="header2" class="row-content row-content-text" width="112" height="110">JS Graph Library Comparison</div>
+<div id="header2" class="row-content row-content-text" width="112" height="110">Metrics Page Mock-up</div>
 <div class="dropdown row-content">
-    <button class="dropbtn">Layouts</button>
+    <button class="dropbtn row-content">Layouts</button>
     <div class="dropdown-content">
         <a href="graph_nav_site.html">2 2 2</a>
         <a href="graph_123.html">1 2 3</a>
@@ -32,16 +31,57 @@
     </div>
 </div>
 
-</div> <!--row tag-->
+</div>  -->
+<!--row tag-->
 
+
+<header class="header">
+    <div class="logo">
+        <img id="logo" class="row-content" src="LSEG-stacked-logo.png" width="112" height="110" alt="logo">
+      <span class="title">LSEG Metrics Dashboard</span>
+    </div>
+    <div class="menu">
+      <button class="menu-btn">Layouts</button>
+      <div class="dropdown">
+        <ul>
+          <li><a href="#">1 2 3</a></li>
+          <li><a href="highchart.html">2 2 2</a></li>
+          <li id="last_drop"><a href="graph_toggle.html">toggle</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
 
 <script>
-const colors = Highcharts.getOptions().colors.map((c, i) =>
+    function parseDate(date) {
+        myDate = date.split("-");
+        newDate = new Date(myDate[0], myDate[1] - 1, myDate[2]);
+        return newDate.getTime();
+    }
+    function grabData (dataSet, metric, param, paramVal) {
+        var list = [];
+        for (var i = 0; i < dataSet.length; i++) {
+            if(dataSet[i][param] === paramVal) {
+                date = dataSet[i]['dt'];
+                val = dataSet[i][metric];
+                // console.log('date: ' + date)
+                // console.log('val' + val)
+                list.push([date, val])
+            }
+        }
+        
+        return list
+    }
+    function lowestDate(dataSet) {
+        console.log('dataSet: ' + dataSet)
+        return parseDate(dataSet[0]['dt'])
+        
+    }
+</script>
 
-        Highcharts.color(Highcharts.getOptions().colors[0])
-            .brighten((i - 3) / 7)
-            .get()
-        );
+<script>
+const colors = ['rgb(0,66,145)', 'rgb(0,103,182)', 'rgb(8,139,218)', 'rgb(44,175,254)', 'rgb(160,200,255)', 'rgb(200, 200, 225)', 'rgb(169, 169, 169)']
+
 let colorNum = 0;
 function grabColor() {
     return colors[colorNum];
@@ -59,184 +99,125 @@ function switchColor() {
 Highcharts.setOptions({
     colors: colors
 });
+
 </script>
 
 <div class="row">
-    <div class="col-md-12 graph-row">
-        <canvas id="graph1"></canvas>
+    <div id="graph1" class="col-md-12 graph-row">
         <script>
-            const data = { 
-        datasets: [{
-                label: '# of votes',
-                data: [
-                    {x: '2022-01-01', y: 57},
-                    {x: '2022-01-02', y: 12},
-                    {x: '2022-01-03', y: 44},
-                    {x: '2022-01-04', y: 90},
-                    {x: '2022-01-05', y: 55},
-                    {x: '2022-01-06', y: 90},
-                    {x: '2022-01-07', y: 83},
-                    {x: '2022-01-08', y: 49},
-                    {x: '2022-01-09', y: 46},
-                    {x: '2022-01-10', y: 96},
-                    {x: '2022-01-11', y: 10},
-                    {x: '2022-01-12', y: 25},
-                    {x: '2022-01-13', y: 52},
-                    {x: '2022-01-14', y: 47},
-                    {x: '2022-01-15', y: 15},
-                    {x: '2022-01-16', y: 35},
-                    {x: '2022-01-17', y: 24}]
-            ,
-            backgroundColor: grabColor(),
-            color: grabColor(),
-            borderColor: grabColor()},
-            {label: '# of sales',
-            data: [{x: '2022-01-01', y: 40},
-                    {x: '2022-01-02', y: 83},
-                    {x: '2022-01-03', y: 62},
-                    {x: '2022-01-04', y: 04},
-                    {x: '2022-01-05', y: 16},
-                    {x: '2022-01-06', y: 37},
-                    {x: '2022-01-07', y: 84},
-                    {x: '2022-01-08', y: 63},
-                    {x: '2022-01-09', y: 78},
-                    {x: '2022-01-10', y: 39},
-                    {x: '2022-01-11', y: 67},
-                    {x: '2022-01-12', y: 14},
-                    {x: '2022-01-13', y: 24},
-                    {x: '2022-01-14', y: 36},
-                    {x: '2022-01-15', y: 53},
-                    {x: '2022-01-16', y: 93},
-                    {x: '2022-01-17', y: 84}],
-                backgroundColor: switchColor(),
-                color: grabColor(),
-                borderColor: grabColor()},
-    ] };
-    // config
-    const zoomOptions1 = {
-        zoom: {
-            drag: {
-            enabled: true
+            let data1;
+
+// Function to fetch the JSON file and return a Promise with the data
+const url1 = 'http://127.0.0.1:8000/JsonModel/fake_data_sequential_dates.json';
+
+function fetchJSONData() {
+  return new Promise((resolve, reject) => {
+    fetch(url1)
+      .then(response => response.json())
+      .then(data => {
+        // Store the fetched data in the global variable
+        data1 = data;
+        console.log('JSON data has been fetched and stored in the global variable jsonData.');
+        // Resolve the Promise with the fetched data
+        resolve();
+      })
+      .catch(error => {
+        console.error('Error fetching JSON data:', error);
+        // Reject the Promise with the error
+        reject(error);
+      });
+  });
+}
+
+// Call the function to fetch the JSON data and then do something with it
+fetchJSONData()
+  .then(() => {
+            Highcharts.stockChart('graph1', {
+            rangeSelector: {
+                enabled: true,
+                selected: 1
             },
-            mode: 'x',
-        },
-    };
-
-    const config1 = {
-        type: 'line',
-        data: data,
-        options: {
-            elements: {
-                point: {
-                    radius: 0
-                }
-            },
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'day'
-                    }
-                },
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                zoom: zoomOptions1
-            }
-        }
-    }
-    // render / init
-    const graph1 = new Chart(
-        document.getElementById('graph1'),
-        config1
-    )
-
-
-    function resetZoom1() {
-        graph1.resetZoom();
-    }
-          </script>
-          <button id="resetZoom" onclick="resetZoom1()">Reset Zoom</button>
-
-    </div>
-</div>
-
-<div class="row">
-    <div id = "graph2" class="col-md-6 graph-row">
-
-        <script>
-            Highcharts.chart('graph2', {
             
             chart: {
                 zoomType: 'x',
                 // height: (5 / 6 * 100) + '%'
                 // height: '50%'
+                zooming: {
+                    mouseWheel: false
+                }
             },
     
             title: {
-                text: 'U.S Solar Employment Growth',
+                text: 'Lead Time To Change',
                 align: 'center'
             },
     
-            subtitle: {
-                text: 'figure 1;  source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
-                align: 'center',
-                verticalAlign: 'bottom'
-            },
+            // subtitle: {
+            //     text: 'figure 1;  source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
+            //     align: 'center',
+            //     verticalAlign: 'bottom'
+            // },
     
             yAxis: {
                 title: {
-                    text: 'Number of Employees'
-                }
+                    text: 'Time'
+                },
+                opposite: false
             },
     
             xAxis: {
                 accessibility: {
-                    rangeDescription: 'Range: 2010 to 2020'
-                }
+                    // rangeDescription: 'Range: 2010 to 2020'
+                },
+                // categories: grabDate(grabMetric(data1, 'dt'))
             },
     
-            legend: {
-                layout: 'horizontal',
-                align: 'center',
-                verticalAlign: 'bottom'
+            // legend: {
+            //     layout: 'horizontal',
+            //     align: 'center',
+            //     verticalAlign: 'bottom'
+            // },
+            navigator: {
+                enabled: false
             },
+            scrollbar: {
+                enabled: false
+            },
+            // rangeSelector : {
+            //     enabled: false
+            // },
     
             plotOptions: {
                 series: {
+                    pointIntervalUnit: 'day',
+                    pointStart: lowestDate(data1),
                     marker: {
                         enabled: false
                     },
                     label: {
                         connectorAllowed: false
                     },
-                    pointStart: 2010,
+                    // pointStart: 2010,
+                    lineWidth: 3,
+                    // showInNavigator: false
+                    turboThreshold: 10000000
                 }
             },
     
             series: [{
-                name: 'Installation & Developers',
-                data: [43934, 48656, 65165, 81827, 112143, 142383,
-                    171533, 165174, 155157, 161454, 154610]
-            }, {
-                name: 'Manufacturing',
-                data: [24916, 37941, 29742, 29851, 32490, 30282,
-                    38121, 36885, 33726, 34243, 31050]
-            }, {
-                name: 'Sales & Distribution',
-                data: [11744, 30000, 16005, 19771, 20185, 24377,
-                    32147, 30912, 29243, 29213, 25663]
-            }, {
-                name: 'Operations & Maintenance',
-                data: [null, null, null, null, null, null, null,
-                    null, 11164, 11218, 10077]
-            }, {
-                name: 'Other',
-                data: [21908, 5548, 8105, 11248, 8989, 11816, 18274,
-                    17300, 13053, 11906, 10073]
-            }],
+                name: 'CMFX-FXall-WS',
+                data: grabData(data1, 'cnt', 'group_id', 33828)
+                // data: data2
+            },
+            {
+                name: 'YB Analytics API',
+                data: grabData(data1, 'cnt', 'group_id', 19679)
+            },
+            {
+                name: 'Monthly Dashboard Reporting',
+                data: grabData(data1, 'cnt', 'group_id', 43792)
+            }
+        ],
     
             responsive: {
                 rules: [{
@@ -255,74 +236,34 @@ Highcharts.setOptions({
             }
     
             });
-    
+        })
+  .catch(error => {
+    // Handle any errors that occurred during the fetch operation
+    console.error('Error occurred:', error);
+  });
+            //HERE!!!!
         </script>
-
-    </div>
-    <div class="col-md-6 graph-row">
-        <canvas id="graph3"></canvas>
-        <script>
-
-    // config
-    const zoomOptions3 = {
-        zoom: {
-            drag: {
-            enabled: true
-            },
-            mode: 'x',
-        },
-    };
-
-    const config3 = {
-        type: 'bar',
-        data: data,
-        options: {
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'day'
-                    }
-                },
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                zoom: zoomOptions3
-            }
-        }
-    }
-    // render / init
-    const graph3 = new Chart(
-        document.getElementById('graph3'),
-        config3
-    )
-
-    function resetZoom3() {
-        graph3.resetZoom();
-    }
-          </script>
-          <button onclick="resetZoom3()">Reset Zoom</button>
-
     </div>
 </div>
 
 <div class="row">
-    <div id="graph4" class="col-md-4">
+    <div id="graph2" class="col-md-6 graph-row">
         <script>
-            Highcharts.chart('graph4', {
+            Highcharts.chart('graph2', {
     chart: {
         type: 'column',
-        zoomType: 'x'
+        zoomType: 'x',
+        zooming: {
+            mouseWheel: false
+        }
     },
     title: {
-        text: 'Blobal Average Rainfall'
+        text: 'Submitted Tickets Per Month By Office'
     },
-    subtitle: {
-        verticalAlign: 'bottom',
-        text: 'figure 2;  source: WorldClimate.com'
-    },
+    // subtitle: {
+    //     verticalAlign: 'bottom',
+    //     text: 'figure 2;  source: WorldClimate.com'
+    // },
     xAxis: {
         categories: [
             'Jan',
@@ -343,13 +284,13 @@ Highcharts.setOptions({
     yAxis: {
         min: 0,
         title: {
-            text: 'Rainfall (mm)'
+            text: 'Tickets'
         }
     },
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -361,91 +302,51 @@ Highcharts.setOptions({
         }
     },
     series: [{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-            194.1, 95.6, 54.4]
+        name: 'London',
+        data: [49, 71, 106, 129, 127, 88, 135, 148, 132,
+            101, 95, 54]
 
     }, {
         name: 'New York',
-        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5,
-            106.6, 92.3]
+        data: [83, 78, 98, 93, 106, 84, 105, 104, 91, 83,
+            106, 92]
 
     }, {
-        name: 'London',
-        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3,
-            51.2]
+        name: 'Bangkok',
+        data: [48, 38, 39, 41, 47, 48, 59, 59, 52, 65, 59,
+            51]
 
     }, {
-        name: 'Berlin',
-        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8,
-            51.1]
+        name: 'Nottingham',
+        data: [42, 33, 34, 39, 52, 75, 57, 60, 47, 39, 46,
+            51]
 
     }]
 });
         </script>
     </div>
-    <div class="col-md-4 graph-row">
-        <canvas id="graph5"></canvas>
+    <div id="graph3" class="col-md-6 graph-row">
         <script>
-            // config
-            const data5 = {
-                labels: [
-                    'Red',
-                    'Blue',
-                    'Yellow'
-                ],
-                datasets: [{
-                    label: 'My First Dataset',
-                    data: [300, 50, 100],
-                    backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    '#89CFF0',
-                    'rgb(255, 205, 86)'
-                    ],
-                    hoverOffset: 4
-                }]
-            };
-        
-            const config5 = {
-                type: 'pie',
-                data: {
-                    labels: ['Chrome', 'Edge', 'Firefox', 'Safari', 'Internet Explorer', 'Others'],
-                    datasets: [{
-                        label: "Browser Usage",
-                        data: [70.8, 14.8, 4.9, 2.6, 1.5, 2.6],
-                        // backgroundColor: ['#AE8CA3', '#088F8F', 'rgb(255, 99, 132)', '#AB2346', '#14248A', '#C2B97F'],
-                        backgroundColor: colors,
-                        hoverOffset: 4
-                    }]
-                }
-                // data: data5
-            }
-            // render / init
-            const graph5 = new Chart(
-                document.getElementById('graph5'),
-                config5
-            )
-                  </script>
-    </div>
-    <div id="graph6" class="col-md-4 graph-row">
-        <script>
-            Highcharts.chart('graph6', {
+            Highcharts.chart('graph3', {
                 chart: {
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
-                    type: 'pie'
+                    type: 'pie',
+                    zooming: {
+                        mouseWheel: false
+                    }
                 },
                 title: {
-                    text: 'Browser market shares in May, 2020',
-                    align: 'left'
+                    text: 'Average Work Week Time Distribution',
+                    align: 'center'
                 },
                 tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    pointFormat: '{point.percentage:.1f}%<br>{point.y} hours</b>'
                 },
                 accessibility: {
                     point: {
-                        valueSuffix: '%'
+                        // valueSuffix: ' hours'
                     }
                 },
                 plotOptions: {
@@ -454,46 +355,425 @@ Highcharts.setOptions({
                         cursor: 'pointer',
                         colors,
                         dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                        }
+                            enabled: false,
+                            // format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        },
+                        showInLegend: true
                     }
                 },
                 series: [{
-                    name: 'Brands',
+                    name: 'Tasks',
+                    size: '100%',
+                    innerSize: '50%',
                     colorByPoint: true,
                     data: [{
-                        name: 'Chrome',
-                        y: 70.67,
+                        name: 'Coding ',
+                        y: 17.5,
                         sliced: true,
                         selected: true
                     }, {
-                        name: 'Edge',
-                        y: 14.77
+                        name: 'Debugging',
+                        y: 13
                     },  {
-                        name: 'Firefox',
-                        y: 4.86
+                        name: 'Testing',
+                        y: 4
                     }, {
-                        name: 'Safari',
-                        y: 2.63
-                    }, {
-                        name: 'Internet Explorer',
-                        y: 1.53
-                    },  {
-                        name: 'Opera',
-                        y: 1.40
-                    }, {
-                        name: 'Sogou Explorer',
-                        y: 0.84
-                    }, {
-                        name: 'QQ',
-                        y: 0.51
+                        name: 'Meetings',
+                        y: 3.5
                     }, {
                         name: 'Other',
-                        y: 2.6
+                        y: 4.5
                     }]
                 }]
             });
 </script>
     </div>
 </div>
+
+
+<div class="row">
+    <div id="graph4" class="col-md-4 graph-row">
+        <script>
+            // Substring template helper for the responsive labels
+Highcharts.Templating.helpers.substr = (s, from, length) =>
+    s.substr(from, length);
+
+// Create the chart
+
+Highcharts.chart('graph4', {
+
+    chart: {
+        type: 'heatmap',
+        marginTop: 40,
+        marginBottom: 80,
+        plotBorderWidth: 1,
+        zooming: {
+            mouseWheel: false
+        }
+    },
+
+
+    title: {
+        text: 'Incomplete Tickets by Squad',
+        style: {
+            fontSize: '1em'
+        }
+    },
+
+    xAxis: {
+        categories: ['Squad A', 'Squad B', 'Squad C', 'Squad D', 'Squad E']
+    },
+    yAxis: {
+        categories: ['Sprint 1', 'Sprint 2', 'Sprint 3', 'Sprint 4', 'Sprint 5'],
+        title: null,
+        reversed: true
+    },
+
+    accessibility: {
+        point: {
+            descriptionFormat: '{(add index 1)}. ' +
+                '{series.xAxis.categories.(x)} sales ' +
+                '{series.yAxis.categories.(y)}, {value}.'
+        }
+    },
+
+    colorAxis: {
+        min: 0,
+        minColor: '#FFFFFF',
+        maxColor: Highcharts.getOptions().colors[0]
+    },
+
+    legend: {
+        align: 'right',
+        layout: 'vertical',
+        margin: 0,
+        verticalAlign: 'top',
+        y: 25,
+        symbolHeight: 280
+    },
+
+    tooltip: {
+        format: '<b>{series.xAxis.categories.(point.x)}</b> left<br>' +
+            '<b>{point.value}</b> tickets incomplete during <br>' +
+            '<b>{series.yAxis.categories.(point.y)}</b>'
+    },
+
+    series: [{
+        name: 'Sales per employee',
+        borderWidth: 1,
+        data: [[0, 0, 10], [0, 1, 19], [0, 2, 8], [0, 3, 24], [0, 4, 67],
+            [1, 0, 92], [1, 1, 58], [1, 2, 78], [1, 3, 88], [1, 4, 48],
+            [2, 0, 35], [2, 1, 15], [2, 2, 49], [2, 3, 64], [2, 4, 52],
+            [3, 0, 72], [3, 1, 72], [3, 2, 96], [3, 3, 19], [3, 4, 16],
+            [4, 0, 38], [4, 1, 5], [4, 2, 8], [4, 3, 110], [4, 4, 101]],
+        dataLabels: {
+            enabled: true,
+            color: '#000000'
+        }
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                yAxis: {
+                    labels: {
+                        format: '{substr value 0 1}'
+                    }
+                }
+            }
+        }]
+    }
+
+});
+        </script>
+    </div>
+    <div id="graph5" class="col-md-4 graph-row">
+        <script>
+            Highcharts.chart('graph5', {
+    chart: {
+        type: 'area',
+        zooming: {
+            mouseWheel: false
+        }
+    },
+    title: {
+        text: 'Unresolved Tickets By Category',
+        align: 'center'
+    }
+    ,
+    // subtitle: {
+    //     text: 'Source: ' +
+    //         '<a href="https://www.ssb.no/en/statbank/table/09288/"' +
+    //         'target="_blank">SSB</a>',
+    //     align: 'left'
+    // }
+    // ,
+    yAxis: {
+        title: {
+            useHTML: true,
+            text: 'Tickets'
+        }
+    },
+    tooltip: {
+        shared: true,
+        headerFormat: '<span style="font-size:12px"><b>{point.key}</b></span><br>'
+    },
+    plotOptions: {
+        series: {
+            pointStart: 2012,
+            marker: {
+                enabled: false
+            }
+        },
+        area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            }
+        }
+    },
+    series: [{
+        name: 'Access/Permissions',
+        data: [1323, 1272, 1153, 1779, 1039, 1281, 1548, 1619, 1621]
+    }, {
+        name: 'Dependencies',
+        data: [668, 653, 638, 638, 625, 572, 563, 504, 503]
+
+    }, {
+        name: 'Network Connectivity',
+        data: [475, 482, 487, 492, 500, 497, 494, 491, 491]
+    }, {
+        name: 'Hardware',
+        data: [316, 354, 389, 411, 338, 356, 388, 459, 155]
+
+    }, {
+        name: 'Other',
+        data: [201, 218, 215, 221, 217, 225, 234, 217, 218]
+    }]
+});
+
+        </script>
+    </div>
+    <div id="graph6" class="col-md-4 graph-row">
+        <script>
+            Highcharts.chart('graph6', {
+    chart: {
+        type: 'column',
+        zooming: {
+            mouseWheel: false
+        }
+    },
+    title: {
+        text: 'Stock Value By Month',
+        align: 'center'
+    },
+    xAxis: {
+        categories: ['March', 'April', 'May', 'June', 'July']
+    },
+    credits: {
+        enabled: false
+    },
+    plotOptions: {
+        column: {
+            borderRadius: '25%'
+        }
+    },
+    tooltip: {
+        formatter: function() {
+                   return ''+
+               this.y +'%';
+         }
+    },
+    series: [{
+        name: 'Amazon',
+        data: [5, 3, 4, 7, 2]
+    }, {
+        name: 'Google',
+        data: [2, -2, -3, 2, 1]
+    }, {
+        name: 'Facebook',
+        data: [3, 4, 4, -2, 5]
+    }]
+});
+        </script>
+    </div>
+</div>
+
+<script>
+    const data3 = [
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-07-01",
+        "cnt": 93
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-08-01",
+        "cnt": 114
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-09-01",
+        "cnt": 86
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-10-01",
+        "cnt": 105
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-11-01",
+        "cnt": 97
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2022-12-01",
+        "cnt": 118
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-01-01",
+        "cnt": 79
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-02-01",
+        "cnt": 117
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-03-01",
+        "cnt": 101
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-04-01",
+        "cnt": 101
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-05-01",
+        "cnt": 92
+    },
+    {
+        "group_id": 33828,
+        "group_name": "CMFX-FXall-WS",
+        "group_full_path": "app/app-50923",
+        "dt": "2023-06-01",
+        "cnt": 96
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-07-01",
+        "cnt": 110
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-08-01",
+        "cnt": 154
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-09-01",
+        "cnt": 153
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-10-01",
+        "cnt": 141
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-11-01",
+        "cnt": 154
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2022-12-01",
+        "cnt": 155
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-01-01",
+        "cnt": 123
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-02-01",
+        "cnt": 139
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-03-01",
+        "cnt": 112
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-04-01",
+        "cnt": 104
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-05-01",
+        "cnt": 117
+    },
+    {
+        "group_id": 19679,
+        "group_name": "YB Analytics API",
+        "group_full_path": "app/app-01100",
+        "dt": "2023-06-01",
+        "cnt": 102
+    }
+];
+</script>

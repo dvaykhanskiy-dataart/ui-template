@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.0.1/modules/heatmap.min.js" integrity="sha512-UnB4oMqreoARmg5J+Z75xQj0EVIIfV3ciCNGOyZ/m6HgNcg6eztp06jio3syCn4lTsMcbWMXE0zt+XqG3seehA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" type="text/css" href="styles3.css" />
+
+<script>
+    function parseDate(date) {
+        myDate = date.split("-");
+        newDate = new Date(myDate[0], myDate[1] - 1, myDate[2]);
+        return newDate.getTime();
+    }
+    function grabData (dataSet, metric, param, paramVal) {
+        var list = [];
+        for (var i = 0; i < dataSet.length; i++) {
+            if(dataSet[i][param] === paramVal) {
+                date = dataSet[i]['dt'];
+                val = dataSet[i][metric];
+                // console.log('date: ' + date)
+                // console.log('val' + val)
+                list.push([date, val])
+            }
+        }
+        
+        return list
+    }
+    function lowestDate(dataSet) {
+        // console.log('dataSet: ' + dataSet)
+        return parseDate(dataSet[0]['dt'])
+        
+    }
+</script>
+
+<script>
+const colors = ['rgb(0,66,145)', 'rgb(0,103,182)', 'rgb(8,139,218)', 'rgb(44,175,254)', 'rgb(160,200,255)', 'rgb(200, 200, 225)', 'rgb(169, 169, 169)']
+
+let colorNum = 0;
+function grabColor() {
+    return colors[colorNum];
+}
+function switchColor() {
+    if (colorNum == colors.length || colorNum == colors.length + 1) {
+        colorNum = 0;
+    } else {
+        colorNum += 2;
+    }
+    col = colors[colorNum];
+    return col
+}
+        
+Highcharts.setOptions({
+    colors: colors
+});
+
+</script>
+<div id="chart-toggle">
+    <button onclick="toggleChartType()">Toggle Chart Type</button>
+  </div>
+
+  <div id="loading-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.7); display: flex; justify-content: center; align-items: center;">
+    <span>Loading...</span>
+    <!-- You can use a spinner or any other loading indicator here if desired -->
+  </div>
+
+<div id="graph1" class="graph-row">
+    <script>
+        let data1;
+
+// Function to fetch the JSON file and return a Promise with the data
+const url1 = 'http://127.0.0.1:8000/JsonModel/fake_data_mil.json';
+
+let currentChart = null;
+
+function fetchJSONData() {
+  return new Promise((resolve, reject) => {
+    fetch(url1)
+      .then(response => response.json())
+      .then(data => {
+        // Resolve the Promise with the fetched data
+        // console.log(data)
+        resolve(data);
+      })
+      .catch(error => {
+        console.error('Error fetching JSON data:', error);
+        // Reject the Promise with the error
+        reject(error);
+      });
+  });
+}
+function fetchDataAndRenderChart(chartType) {
+  fetchJSONData()
+    .then(data => {
+        let graph1_options = {
+        rangeSelector: {
+            enabled: true,
+            selected: 1
+        },
+        
+        chart: {
+            zoomType: 'x',
+            // height: (5 / 6 * 100) + '%'
+            // height: '50%'
+        },
+
+        title: {
+            text: 'Lead Time To Change',
+            align: 'center'
+        },
+
+        // subtitle: {
+        //     text: 'figure 1;  source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
+        //     align: 'center',
+        //     verticalAlign: 'bottom'
+        // },
+
+        yAxis: {
+            title: {
+                text: 'Time'
+            },
+            opposite: false
+        },
+
+        xAxis: {
+            accessibility: {
+                // rangeDescription: 'Range: 2010 to 2020'
+            },
+            // categories: grabDate(grabMetric(data1, 'dt'))
+        },
+
+        // legend: {
+        //     layout: 'horizontal',
+        //     align: 'center',
+        //     verticalAlign: 'bottom'
+        // },
+        navigator: {
+            enabled: false
+        },
+        scrollbar: {
+            enabled: false
+        },
+        // rangeSelector : {
+        //     enabled: false
+        // },
+
+        plotOptions: {
+            series: {
+                pointIntervalUnit: 'day',
+                pointStart: lowestDate(data),
+                marker: {
+                    enabled: false
+                },
+                label: {
+                    connectorAllowed: false
+                },
+                // pointStart: 2010,
+                lineWidth: 3,
+                // showInNavigator: false
+                turboThreshold: 10000000
+            }
+        },
+
+        series: [{
+            name: 'CMFX-FXall-WS',
+            data: grabData(data, 'cnt', 'group_id', 33828)
+            // data: data2
+        },
+        {
+            name: 'YB Analytics API',
+            data: grabData(data, 'cnt', 'group_id', 19679)
+        },
+        {
+            name: 'Monthly Dashboard Reporting',
+            data: grabData(data, 'cnt', 'group_id', 43792)
+        }
+    ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500,
+                    minHeight: 800
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+        };
+
+
+      // Update the chart type
+      graph1_options.chart.type = chartType;
+
+      // Hide the chart container temporarily while we show the loading screen
+      var chartContainer = document.getElementById('graph1');
+      chartContainer.style.display = 'none';
+
+      // Show the loading screen
+      var loadingScreen = document.getElementById('loading-screen');
+      loadingScreen.style.display = 'flex';
+
+      // Update the series data using the fetched data
+      graph1_options.series[0].data = grabData(data, 'cnt', 'group_id', 33828);
+      graph1_options.series[1].data = grabData(data, 'cnt', 'group_id', 19679);
+      graph1_options.series[2].data = grabData(data, 'cnt', 'group_id', 43792);
+
+      // Destroy the previous chart, if it exists
+      if (currentChart) {
+        currentChart.destroy();
+      }
+
+      // Render the chart and update the reference to the current chart
+      currentChart = Highcharts.stockChart('graph1', graph1_options);
+
+      // Hide the loading screen after the chart is rendered
+      loadingScreen.style.display = 'none';
+
+      // Show the chart container again
+      chartContainer.style.display = 'block';
+    })
+    .catch(error => {
+      // Handle any errors that occurred during the fetch operation
+      console.error('Error occurred:', error);
+    });
+}
+
+
+
+// Function to toggle between bar and line charts
+function toggleChartType() {
+  var newChartType = currentChart.options.chart.type === 'column' ? 'line' : 'column';
+
+  // Call fetchDataAndRenderChart with the new chart type
+  fetchDataAndRenderChart(newChartType);
+}
+
+// Initialize the chart
+document.addEventListener("DOMContentLoaded", function () {
+  var initialChartType = 'column'; // Set the initial chart type here (can be 'column' or 'line')
+  fetchDataAndRenderChart(initialChartType);
+});
+    </script>
+</div>

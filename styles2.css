@@ -1,0 +1,16 @@
+.addScroll {
+  height: 400px;
+  overflow-y: auto;
+  /* border: 5px solid red */
+}
+
+/* .scroll-graph {
+  overflow-y: auto;
+  height: 400px
+} */
+
+#graph2 {
+  height: 400px;
+  overflow: hidden;
+  width: 800px
+}

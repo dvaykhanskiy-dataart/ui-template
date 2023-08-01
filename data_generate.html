@@ -1,0 +1,372 @@
+<!-- <!DOCTYPE html>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+
+
+<script>
+const colors = ['rgb(0,66,145)', 'rgb(0,103,182)', 'rgb(8,139,218)', 'rgb(44,175,254)', 'rgb(160,200,255)', 'rgb(200, 200, 225)', 'rgb(169, 169, 169)']
+</script>
+
+<script>
+    function parseDate(date) {
+        myDate = date.split("-");
+        newDate = new Date(myDate[0], myDate[1] - 1, myDate[2]);
+        return newDate.getTime();
+    }
+    function grabData (dataSet, metric, param, paramVal) {
+        var list = [];
+        for (var i = 0; i < dataSet.length; i++) {
+            if(dataSet[i][param] === paramVal) {
+                date = dataSet[i]['dt'];
+                val = dataSet[i][metric];
+                // console.log('date: ' + date)
+                // console.log('val' + val)
+                list.push([date, val])
+            }
+        }
+        
+        return list
+    }
+    function lowestDate(dataSet) {
+        console.log('dataSet: ' + dataSet)
+        return parseDate(dataSet[0]['dt'])
+        
+    }
+</script>
+
+<script>
+    
+    
+    const url1 = 'http://127.0.0.1:8000/JsonModel/LeadTimeToChange-Daily-Padded.json';
+
+function fetchJSONData() {
+  return new Promise((resolve, reject) => {
+    fetch(url1)
+      .then(response => response.json())
+      .then(data => {
+        // Store the fetched data in the global variable
+        data1 = data;
+        console.log('JSON data has been fetched and stored in the global variable jsonData.');
+        // Resolve the Promise with the fetched data
+        resolve();
+      })
+      .catch(error => {
+        console.error('Error fetching JSON data:', error);
+        // Reject the Promise with the error
+        reject(error);
+      });
+  });
+}
+</script>
+
+<div id="graph1">
+    <script>
+fetchJSONData()
+  .then(() => {
+            Highcharts.stockChart('graph1', {
+            rangeSelector: {
+                enabled: true,
+                selected: 1
+            },
+            
+            chart: {
+                zoomType: 'x',
+                // height: (5 / 6 * 100) + '%'
+                // height: '50%'
+            },
+    
+            title: {
+                text: 'Lead Time To Change',
+                align: 'center'
+            },
+    
+            // subtitle: {
+            //     text: 'figure 1;  source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
+            //     align: 'center',
+            //     verticalAlign: 'bottom'
+            // },
+    
+            yAxis: {
+                title: {
+                    text: 'Time'
+                },
+                opposite: false
+            },
+    
+            xAxis: {
+                accessibility: {
+                    // rangeDescription: 'Range: 2010 to 2020'
+                },
+                // categories: grabDate(grabMetric(data1, 'dt'))
+            },
+    
+            // legend: {
+            //     layout: 'horizontal',
+            //     align: 'center',
+            //     verticalAlign: 'bottom'
+            // },
+            navigator: {
+                enabled: false
+            },
+            scrollbar: {
+                enabled: false
+            },
+            // rangeSelector : {
+            //     enabled: false
+            // },
+    
+            plotOptions: {
+                series: {
+                    pointIntervalUnit: 'day',
+                    pointStart: lowestDate(data1),
+                    marker: {
+                        enabled: false
+                    },
+                    label: {
+                        connectorAllowed: false
+                    },
+                    // pointStart: 2010,
+                    lineWidth: 3,
+                    // showInNavigator: false
+                }
+            },
+    
+            series: [{
+                name: 'CMFX-FXall-WS',
+                data: grabData(data1, 'cnt', 'group_id', 33828)
+                // data: data2
+            },
+            {
+                name: 'YB Analytics API',
+                data: grabData(data1, 'cnt', 'group_id', 19679)
+            },
+            {
+                name: 'Monthly Dashboard Reporting',
+                data: grabData(data1, 'cnt', 'group_id', 43792)
+            }
+        ],
+    
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500,
+                        minHeight: 800
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+    
+            });
+        })
+  .catch(error => {
+    // Handle any errors that occurred during the fetch operation
+    console.error('Error occurred:', error);
+  });
+</script>
+</div>
+
+
+
+ <div id="graph1">
+    <script>
+        Highcharts.stockChart('graph1', {
+            rangeSelector: {
+                enabled: true,
+                selected: 1
+            },
+            
+            chart: {
+                zoomType: 'x',
+                // height: (5 / 6 * 100) + '%'
+                // height: '50%'
+            },
+    
+            title: {
+                text: 'Lead Time To Change',
+                align: 'center'
+            },
+    
+            // subtitle: {
+            //     text: 'figure 1;  source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
+            //     align: 'center',
+            //     verticalAlign: 'bottom'
+            // },
+    
+            yAxis: {
+                title: {
+                    text: 'Time'
+                },
+                opposite: false
+            },
+    
+            xAxis: {
+                accessibility: {
+                    // rangeDescription: 'Range: 2010 to 2020'
+                },
+                // categories: grabDate(grabMetric(data1, 'dt'))
+            },
+    
+            // legend: {
+            //     layout: 'horizontal',
+            //     align: 'center',
+            //     verticalAlign: 'bottom'
+            // },
+            navigator: {
+                enabled: false
+            },
+            scrollbar: {
+                enabled: false
+            },
+            // rangeSelector : {
+            //     enabled: false
+            // },
+    
+            plotOptions: {
+                series: {
+                    pointIntervalUnit: 'day',
+                    pointStart: lowestDate(data1),
+                    marker: {
+                        enabled: false
+                    },
+                    label: {
+                        connectorAllowed: false
+                    },
+                    // pointStart: 2010,
+                    lineWidth: 3,
+                    // showInNavigator: false
+                    turboThreshold: 1000000
+                }
+            },
+    
+            series: [{
+                name: 'CMFX-FXall-WS',
+                data: grabData(data1, 'cnt', 'group_id', 33828)
+                // data: data2
+            },
+            {
+                name: 'YB Analytics API',
+                data: grabData(data1, 'cnt', 'group_id', 19679)
+            },
+            {
+                name: 'Monthly Dashboard Reporting',
+                data: grabData(data1, 'cnt', 'group_id', 43792)
+            }
+        ],
+    
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500,
+                        minHeight: 800
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+    
+            });
+    </script>
+</div> --> 
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fake Data Generator</title>
+</head>
+<body>
+  <button onclick="generateFakeData()">Generate Fake Data</button>
+
+  <script>
+    // Function to generate a random integer between 75 and 160
+    function getRandomCnt() {
+      return Math.floor(Math.random() * (160 - 75 + 1)) + 75;
+    }
+
+    // Function to generate sequential dates from Jan 1st, 1975 to Dec 31st, 2022
+    function generateSequentialDates() {
+      const startDate = new Date('1975-01-01');
+      const endDate = new Date('3122-12-31');
+      const dates = [];
+      const currentDate = new Date(startDate);
+
+      while (currentDate <= endDate) {
+        dates.push(currentDate.toISOString().slice(0, 10));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      return dates;
+    }
+
+    // Function to generate fake data for all series with sequential dates
+    function generateFakeData() {
+      const dates = generateSequentialDates();
+      const data = [];
+
+      for (const date of dates) {
+        for (let series = 1; series <= 3; series++) {
+          let group_id, group_name, group_full_path;
+
+          if (series === 1) {
+            group_id = 33828;
+            group_name = "CMFX-FXall-WS";
+            group_full_path = "app/app-50923";
+          } else if (series === 2) {
+            group_id = 19679;
+            group_name = "YB Analytics API";
+            group_full_path = "app/app-01100";
+          } else {
+            group_id = 43792;
+            group_name = "Monthly Dashboard Reporting";
+            group_full_path = "app/app-30574";
+          }
+
+          const cnt = getRandomCnt();
+
+          const entry = {
+            group_id,
+            group_name,
+            group_full_path,
+            dt: date,
+            cnt,
+          };
+
+          data.push(entry);
+        }
+      }
+
+      // Convert data to JSON string
+      const jsonString = JSON.stringify(data, null, 2);
+
+      // Create a Blob with the JSON data
+      const blob = new Blob([jsonString], { type: 'application/json' });
+
+      // Create a temporary URL for the Blob
+      const url = URL.createObjectURL(blob);
+
+      // Create a link and set its attributes to download the JSON file
+      const downloadLink = document.createElement('a');
+      downloadLink.href = url;
+      downloadLink.download = 'fake_data_mil.json';
+      downloadLink.click();
+
+      // Clean up the temporary URL
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

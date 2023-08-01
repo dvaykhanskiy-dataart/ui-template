@@ -35,6 +35,14 @@
     border-left: 5px solid blue;
     padding-left: 25px;
 }
+#graph2 {
+    height: 400px
+}
+.addScroll {
+    height: 400px;
+    overflow-y: auto;
+    /* border: 5px solid red */
+}
 
 .graph-row {
     /* border: 3px solid red; */
@@ -60,6 +68,7 @@
 
 #logo {
     margin-left: 20px;
+    background-color: white;
 }
 
 button {
@@ -82,9 +91,7 @@ button {
     padding-bottom: 18px;
 }
 
-.dropbtn {
-    /* background-color: #04AA6D; */
-    /* color: white; */
+/* .dropbtn {
     padding-top: 10px;
     padding-bottom: 18px;
     margin-left: 40px;
@@ -103,7 +110,6 @@ button {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    /* min-width: 160px; */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     width: 100%;
@@ -118,8 +124,83 @@ button {
     display: block;
   }  
 
-  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropdown-content {display: block;} */
 
   .row {
     /* border: 10px solid red */
   }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #001eff;
+    padding: 10px;
+    color: black;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+  .neu {
+    width: 20%
+  }
+  .menu-btn {
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    width: 100%
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    background-color: white;
+    width: 100%;
+    border-width: 3px;
+    border-color: black;
+  }
+  
+  .dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    display: none;
+    width: 100%;
+    border-radius: 4px;
+    border-width: 3px;
+    border-color: black;
+  }
+  
+  .dropdown ul li {
+    padding: 5px;
+    text-align: center;
+    background-color: white;
+    border-radius: 4px;
+    border-width: 3px;
+    border-color: black;
+  }
+  
+  .dropdown ul li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown ul li a:hover {
+    background-color: #fff;
+    color: #001eff;
+  }
+  
+  .menu:hover .dropdown ul,
+.dropdown ul:hover {
+  display: block;
+  border-width: 1px;
+    border-color: black;
+}

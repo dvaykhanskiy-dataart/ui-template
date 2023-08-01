@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+const colors = ['rgb(0,66,145)', 'rgb(0,103,182)', 'rgb(8,139,218)', 'rgb(44,175,254)', 'rgb(160,200,255)', 'rgb(200, 200, 225)', 'rgb(169, 169, 169)']
+</script>
+
+<script>
+    const data2 = [[1626701400000,142.45],[1626787800000,146.15],[1626874200000,145.4],[1626960600000,146.8],[1627047000000,148.56],[1627306200000,148.99],[1627392600000,146.77],[1627479000000,144.98],[1627565400000,145.64],[1627651800000,145.86],[1627911000000,145.52],[1627997400000,147.36],[1628083800000,146.95],[1628170200000,147.06],[1628256600000,146.14],[1628515800000,146.09],[1628602200000,145.6],[1628688600000,145.86],[1628775000000,148.89],[1628861400000,149.1],[1629120600000,151.12],[1629207000000,150.19],[1629293400000,146.36],[1629379800000,146.7],[1629466200000,148.19],[1629725400000,149.71],[1629811800000,149.62],[1629898200000,148.36],[1629984600000,147.54],[1630071000000,148.6],[1630330200000,153.12],[1630416600000,151.83],[1630503000000,152.51],[1630589400000,153.65],[1630675800000,154.3],[1631021400000,156.69],[1631107800000,155.11],[1631194200000,154.07],[1631280600000,148.97],[1631539800000,149.55],[1631626200000,148.12],[1631712600000,149.03],[1631799000000,148.79],[1631885400000,146.06],[1632144600000,142.94],[1632231000000,143.43],[1632317400000,145.85],[1632403800000,146.83],[1632490200000,146.92],[1632749400000,145.37],[1632835800000,141.91],[1632922200000,142.83],[1633008600000,141.5],[1633095000000,142.65],[1633354200000,139.14],[1633440600000,141.11],[1633527000000,142],[1633613400000,143.29],[1633699800000,142.9],[1633959000000,142.81],[1634045400000,141.51],[1634131800000,140.91],[1634218200000,143.76],[1634304600000,144.84],[1634563800000,146.55],[1634650200000,148.76],[1634736600000,149.26],[1634823000000,149.48],[1634909400000,148.69],[1635168600000,148.64],[1635255000000,149.32],[1635341400000,148.85],[1635427800000,152.57],[1635514200000,149.8],[1635773400000,148.96],[1635859800000,150.02],[1635946200000,151.49],[1636032600000,150.96],[1636119000000,151.28],[1636381800000,150.44],[1636468200000,150.81],[1636554600000,147.92],[1636641000000,147.87],[1636727400000,149.99],[1636986600000,150],[1637073000000,151],[1637159400000,153.49],[1637245800000,157.87],[1637332200000,160.55],[1637591400000,161.02],[1637677800000,161.41]]
+    // function grabMetric (dataSet, metric, param, paramVal) {
+    //     var list = [];
+    //     for (var i = 0; i < dataSet.length; i++) {
+    //         if (dataSet[i][param] === paramVal){
+    //             list.push(dataSet[i][metric]);
+    //         }
+    //     }
+    //     return list;
+    // }
+    // function grabDate (date) {
+    //     let list = [];
+    //     for (let i = 0; i < date.length; i++) {
+    //         // console.log('year: ' + typeof parseInt(date[i].slice(0, 4)))
+    //         // console.log('month: ', typeof parseInt(date[i].slice(5, 7)))
+    //         // console.log('day: ', typeof parseInt(date[i].slice(8, 10)))
+    //         // console.log('date: ', Date.UTC(parseInt(date[i].slice(0, 4)), parseInt(date[i].slice(5, 7)), parseInt((date[i].slice(8, 10)))))
+    //         // let dateVal = Date.UTC(parseInt(date[i].slice(0, 4)), parseInt(date[i].slice(5, 7)), parseInt((date[i].slice(8, 10))));
+    //         // console.log('dateval: ' + dateVal)
+    //         list[i] = date[i].slice(5, 7) + '-' + date[i].slice(0, 4)
+    //         // list[i] = dateVal
+    //     }
+    //     // console.log('dates: ' + list)
+    //     console.log(list)
+    //     return list;
+    // }
+    function parseDate(date) {
+        myDate = date.split("-");
+        newDate = new Date(myDate[0], myDate[1] - 1, myDate[2]);
+        return newDate.getTime();
+    }
+    function grabData (dataSet, metric, param, paramVal) {
+        var list = [];
+        for (var i = 0; i < dataSet.length; i++) {
+            date = dataSet[i]['dt'];
+            val = dataSet[i][metric];
+            console.log('date: ' + date)
+            console.log('val' + val)
+            list.push([date, val])
+        }
+        
+        return list
+    }
+    function lowestDate(dataSet) {
+        return parseDate(dataSet[0]['dt'])
+        
+    }
+</script>
+
+<div class="row">
+    <div id="graph1" class="col-md-12 graph-row">
+        <script>
+            Highcharts.stockChart('graph1', {
+            rangeSelector: {
+                enabled: true,
+                selected: 1
+            },
+            
+            chart: {
+                zoomType: 'x',
+                // height: (5 / 6 * 100) + '%'
+                // height: '50%'
+            },
+    
+            title: {
+                text: 'Lead Time To Change',
+                align: 'center'
+            },
+    
+            subtitle: {
+                text: 'figure 1;  source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
+                align: 'center',
+                verticalAlign: 'bottom'
+            },
+    
+            yAxis: {
+                title: {
+                    text: 'Time'
+                }
+            },
+    
+            xAxis: {
+                accessibility: {
+                    // rangeDescription: 'Range: 2010 to 2020'
+                },
+                // categories: grabDate(grabMetric(data1, 'dt'))
+            },
+    
+            // legend: {
+            //     layout: 'horizontal',
+            //     align: 'center',
+            //     verticalAlign: 'bottom'
+            // },
+            navigator: {
+                enabled: false
+            },
+            scrollbar: {
+                enabled: false
+            },
+            // rangeSelector : {
+            //     enabled: false
+            // },
+    
+            plotOptions: {
+                series: {
+                    pointIntervalUnit: 'month',
+                    pointStart: lowestDate(data1),
+                    marker: {
+                        enabled: false
+                    },
+                    label: {
+                        connectorAllowed: false
+                    },
+                    // pointStart: 2010,
+                    lineWidth: 3,
+                    // showInNavigator: false
+                }
+            },
+    
+            series: [{
+                name: 'CMFX-FXall-WS',
+                data: grabData(data1, 'cnt', 'group_id', 33828)
+                // data: data2
+            },
+            // {
+            //     name: 'YB Analytics API',
+            //     data: grabData(data1, 'cnt', 'group_id', 19679)
+            // }
+        ],
+    
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500,
+                        minHeight: 800
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+    
+            });
+        </script>
+    </div>
+</div>

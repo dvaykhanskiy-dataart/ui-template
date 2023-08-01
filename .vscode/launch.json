@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open highchart.html",
-            "file": "/Users/davidvaihansky/ui_testing_git/ui-template/highchart.html"
+            "file": "/Users/davidvaihansky/ui_testing_git/ui-template/data_practice.html"
         }
     ]
 }
